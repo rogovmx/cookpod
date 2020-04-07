@@ -61,7 +61,7 @@ config :cookpod, CookpodWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/cookpod_web/(live|views)/.*(ex)$",
-      ~r"lib/cookpod_web/templates/.*(eex)$"
+      ~r"lib/cookpod_web/templates/.*(eex|slim|slime)$"
     ]
   ]
 
@@ -74,3 +74,5 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :phoenix_slime, :use_slim_extension, true

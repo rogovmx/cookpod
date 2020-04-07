@@ -15,3 +15,13 @@ msgstr ""
 #: lib/cookpod_web/templates/page/index.html.eex:2
 msgid "Привет %{name}!"
 msgstr ""
+
+msgid "Welcome to %{name}!"
+msgstr "Вас приветствует %{name}"
+
+msgid "header tnc"
+msgstr "Условия и Положения"
+
+msgid "text tnc"
+msgstr "Ваше участие в процессе рассмотрения регулируется установленными ниже положениями и условиями."
+

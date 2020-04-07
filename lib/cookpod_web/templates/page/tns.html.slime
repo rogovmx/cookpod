@@ -1,0 +1,6 @@
+.container	
+	.card
+		.card-header 
+			h2 = gettext "header tnc"
+		.card-body
+			p.card-text = gettext "text tnc"

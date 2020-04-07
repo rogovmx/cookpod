@@ -16,3 +16,5 @@ config :cookpod, CookpodWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :phoenix_slime, :use_slim_extension, true

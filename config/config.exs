@@ -26,7 +26,12 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :cookpod, CookpodWeb.Gettext, locales: ['en', 'ru']
+config :phoenix, :template_engines,
+	slim: PhoenixSlime.Engine,
+	slime: PhoenixSlime.Engine,
+	slimleex: PhoenixSlime.LiveViewEngine
+
+config :cookpod, CookpodWeb.Gettext, locales: ~w(en ru), default_locale: "ru"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
