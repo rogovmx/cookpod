@@ -3,6 +3,7 @@ defmodule CookpodWeb.SessionController do
 
   action_fallback :fallback
   plug :any_plug
+  plug :put_layout, "session.html"
 
   def show(conn, _params) do
     current_user = get_session(conn, :current_user)
@@ -12,7 +13,7 @@ defmodule CookpodWeb.SessionController do
   end
 
   def new(conn, _params) do
-    render(conn, "new.html", errors: %{})
+    render(conn, "new.html", errors: %{}, current_user: nil)
   end
 
   def create(conn, %{"user" => user}) do
