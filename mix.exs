@@ -22,7 +22,8 @@ defmodule Cookpod.MixProject do
   def application do
     [
       mod: {Cookpod.Application, []},
-      extra_applications: [:logger, :runtime_tools, :set_locale],
+      extra_applications: [:logger, :runtime_tools]
+      # extra_applications: [:logger, :runtime_tools, :set_locale],
     ]
   end
 
