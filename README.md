@@ -1,3 +1,7 @@
+![Elixir CI](https://github.com/rogovmx/cookpod/workflows/Elixir%20CI/badge.svg)
+[![codebeat badge](https://codebeat.co/badges/23696fc9-7c02-41f7-b5d2-4163e55538be)](https://codebeat.co/projects/github-com-rogovmx-cookpod-master)
+[![codecov](https://codecov.io/gh/rogovmx/cookpod/branch/master/graph/badge.svg)](https://codecov.io/gh/rogovmx/cookpod)
+
 # Cookpod
 
 To start your Phoenix server:
@@ -18,3 +22,4 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
