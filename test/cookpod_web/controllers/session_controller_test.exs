@@ -16,13 +16,6 @@ defmodule CookpodWeb.SessionControllerTest do
 
   @data %{name: "Mike", password: "abc123"}
 
-  test "create will put user name into session and redirect", %{conn: conn} do
-    login = post(conn, Routes.session_path(conn, :create, %{user: @data}))
-    assert html_response(login, 302) =~ "redirected"
-
-    session_user = get_session(login, :current_user)
-    assert session_user == "Mike"
-  end
 
   test "login and logout", %{conn: conn} do
     login = post(conn, Routes.session_path(conn, :create, %{user: @data}))

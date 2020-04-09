@@ -50,9 +50,18 @@ defmodule CookpodWeb.Router do
     conn
     |> fetch_session()
     |> fetch_flash()
-    |> put_layout({CookpodWeb.LayoutView, :app})
+    |> put_layout({CookpodWeb.LayoutView, :session})
     |> put_view(CookpodWeb.ErrorView)
     |> render("404.html")
+  end
+
+  def handle_errors(conn, %{kind: :error, reason: %Phoenix.ActionClauseError{}}) do
+    conn
+    |> fetch_session()
+    |> fetch_flash()
+    |> put_layout({CookpodWeb.LayoutView, :session})
+    |> put_view(CookpodWeb.ErrorView)
+    |> render("500.html")
   end
 
   def handle_errors(conn, _) do
