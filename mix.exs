@@ -12,7 +12,7 @@ defmodule Cookpod.MixProject do
       aliases: aliases(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
+      preferred_cli_env: ["coveralls.json": :test]
     ]
   end
 
@@ -22,7 +22,7 @@ defmodule Cookpod.MixProject do
   def application do
     [
       mod: {Cookpod.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :set_locale],
     ]
   end
 
@@ -46,7 +46,9 @@ defmodule Cookpod.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:excoveralls, "~> 0.12.3"},
-      {:credo, "~> 1.3", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
+      {:phoenix_slime, "~> 0.13.1"},
+      {:set_locale, "~> 0.2.1"}
     ]
   end
 

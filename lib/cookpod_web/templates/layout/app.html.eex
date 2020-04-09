@@ -9,6 +9,9 @@
     <%= csrf_meta_tag() %>
   </head>
   <body>
+    <header class="header">
+
+    </header>
     <header>
       <section class="container">
         <nav role="navigation">
@@ -22,8 +25,16 @@
       </section>
     </header>
     <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <ul>
+        <li> <%= new_locale @conn, :en, "English" %> </li>
+        <li> <%= new_locale @conn, :ru, "Russian" %> </li>
+      </ul>
+      <%= if get_flash(@conn, :info) do %>
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+      <%= if get_flash(@conn, :error) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+       <% end %>
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
