@@ -21,6 +21,10 @@ defmodule CookpodWeb.Router do
     plug CookpodWeb.AuthPlug
   end
 
+  pipeline :admin do
+    plug CookpodWeb.BasicAuthPlug, username: "user", password: "secret"
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -32,7 +36,7 @@ defmodule CookpodWeb.Router do
 
   # scope "/:locale", CookpodWeb do
   scope "/", CookpodWeb do
-    pipe_through :browser
+    pipe_through [:browser, :admin]
 
     get "/", PageController, :index
 
@@ -41,7 +45,7 @@ defmodule CookpodWeb.Router do
 
   # scope "/:locale", CookpodWeb do
   scope "/", CookpodWeb do
-    pipe_through [:browser, :protected]
+    pipe_through [:browser, :protected, :admin]
 
     get "/terms_and_conditions", PageController, :terms_and_conditions
   end  

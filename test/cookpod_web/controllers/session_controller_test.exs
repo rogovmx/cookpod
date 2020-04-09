@@ -3,13 +3,25 @@ defmodule CookpodWeb.SessionControllerTest do
 
   import Plug.Conn
 
+	@username 'user'
+	@password 'secret'
+
+	defp using_basic_auth(conn, username, password) do
+	  header_content = "Basic " <> Base.encode64("#{username}:#{password}")
+	  conn |> put_req_header("authorization", header_content)
+	end
+
   test "GET /sessions", %{conn: conn} do
-    conn = get(conn, "/sessions")
+    conn = conn
+    |> using_basic_auth(@username, @password)
+    |> get("/sessions")
     assert html_response(conn, 200) =~ "You are not logged in"
   end
 
   test "GET /sessions/new", %{conn: conn} do
-    conn = get(conn, "/sessions/new")
+  	conn = conn
+    |> using_basic_auth(@username, @password)
+    |> get("/sessions/new")
     assert html_response(conn, 200) =~ "New session"
   end
 
@@ -18,6 +30,8 @@ defmodule CookpodWeb.SessionControllerTest do
 
 
   test "login and logout", %{conn: conn} do
+  	conn = conn
+  	|> using_basic_auth(@username, @password)
     login = post(conn, Routes.session_path(conn, :create, %{user: @data}))
     assert html_response(login, 302) =~ "redirected"
 
