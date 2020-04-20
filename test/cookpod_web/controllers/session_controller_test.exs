@@ -2,6 +2,7 @@ defmodule CookpodWeb.SessionControllerTest do
   use CookpodWeb.ConnCase
 
   import Plug.Conn
+  import Plug.Test
 
 	@username 'admin'
 	@password 'pass'
@@ -16,6 +17,14 @@ defmodule CookpodWeb.SessionControllerTest do
     |> using_basic_auth(@username, @password)
     |> get("/sessions")
     assert html_response(conn, 200) =~ "You are not logged in"
+  end
+
+  test "GET /sessions authenticated", %{conn: conn} do
+    conn = conn
+    |> using_basic_auth(@username, @password)
+    |> init_test_session(%{current_user: "test-user"})
+    |> get(Routes.session_path(conn, :show))
+    assert html_response(conn, 200) =~ "You are logged in"
   end
 
   test "GET /sessions/new", %{conn: conn} do
