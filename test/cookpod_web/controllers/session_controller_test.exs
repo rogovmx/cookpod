@@ -3,8 +3,8 @@ defmodule CookpodWeb.SessionControllerTest do
 
   import Plug.Conn
 
-	@username 'user'
-	@password 'secret'
+	@username 'admin'
+	@password 'pass'
 
 	defp using_basic_auth(conn, username, password) do
 	  header_content = "Basic " <> Base.encode64("#{username}:#{password}")

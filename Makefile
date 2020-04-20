@@ -1,6 +1,6 @@
 server:
-	iex -S mix.phx.server
+	iex -S mix phx.server
 
 db:
-	docker-compose up -db
+	docker-compose up
 	mix ecto.setup

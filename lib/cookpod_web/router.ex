@@ -8,6 +8,7 @@ defmodule CookpodWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug BasicAuth, use_config: {:cookpod, :basic_auth}
 
     # plug(SetLocale,
     #   gettext: CookpodWeb.Gettext,
@@ -21,8 +22,10 @@ defmodule CookpodWeb.Router do
     plug CookpodWeb.AuthPlug
   end
 
-  pipeline :admin do
-    plug CookpodWeb.BasicAuthPlug, username: "user", password: "secret"
+  pipeline :basic_auth do
+    plug BasicAuth,
+      callback: &MyAppWeb.Protected.Authentication.authenticate/3,
+      custom_response: &MyAppWeb.Protected.Helpers.unauthorized_response/1
   end
 
   pipeline :api do
@@ -36,7 +39,7 @@ defmodule CookpodWeb.Router do
 
   # scope "/:locale", CookpodWeb do
   scope "/", CookpodWeb do
-    pipe_through [:browser, :admin]
+    pipe_through [:browser]
 
     get "/", PageController, :index
 
@@ -45,7 +48,7 @@ defmodule CookpodWeb.Router do
 
   # scope "/:locale", CookpodWeb do
   scope "/", CookpodWeb do
-    pipe_through [:browser, :protected, :admin]
+    pipe_through [:browser, :protected]
 
     get "/terms_and_conditions", PageController, :terms_and_conditions
   end  
