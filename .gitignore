@@ -33,8 +33,5 @@ npm-debug.log
 # this depending on your deployment strategy.
 /priv/static/
 
-<<<<<<< HEAD
 /.pg_data/
-=======
-.pg_data
->>>>>>> before
+
