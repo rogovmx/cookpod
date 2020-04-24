@@ -1,0 +1,2 @@
+
+= render CookpodWeb.SessionView, "_show.html", assigns

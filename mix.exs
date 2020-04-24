@@ -22,7 +22,8 @@ defmodule Cookpod.MixProject do
   def application do
     [
       mod: {Cookpod.Application, []},
-      extra_applications: [:logger, :runtime_tools, :set_locale],
+      extra_applications: [:logger, :runtime_tools]
+      # extra_applications: [:logger, :runtime_tools, :set_locale],
     ]
   end
 
@@ -48,7 +49,8 @@ defmodule Cookpod.MixProject do
       {:excoveralls, "~> 0.12.3"},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
       {:phoenix_slime, "~> 0.13.1"},
-      {:set_locale, "~> 0.2.1"}
+      {:basic_auth, "~> 2.2.2"}
+      # {:set_locale, "~> 0.2.1"},
     ]
   end
 
