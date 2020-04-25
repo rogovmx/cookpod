@@ -4,8 +4,6 @@ defmodule CookpodWeb.SessionController do
   alias Cookpod.User
   alias Cookpod.Repo
 
-  plug :put_layout, "session.html"
-
   def show(conn, _params) do
     current_user = get_session(conn, :current_user)
     render(conn, :show, current_user: current_user)

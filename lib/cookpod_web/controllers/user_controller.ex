@@ -4,8 +4,6 @@ defmodule CookpodWeb.UserController do
   alias Cookpod.User
   alias Cookpod.Repo
 
-  plug :put_layout, "session.html"
-
   def new(conn, _params) do
     changeset = User.new_changeset()
     render(conn, :new, changeset: changeset)
