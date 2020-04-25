@@ -1,5 +1,8 @@
 h1 Listing Recipes
 
+= link "Drafts", to: Routes.recipe_path(@conn, :drafts), class: 'btn btn-secondary'
+= link "Published", to: Routes.recipe_path(@conn, :index), class: 'btn btn-primary'
+
 table
   thead
     tr
@@ -20,3 +23,4 @@ table
           = link "Delete", to: Routes.recipe_path(@conn, :delete, recipe), method: :delete, data: [confirm: "Are you sure?"]
 
 span= link "New Recipe", to: Routes.recipe_path(@conn, :new)
+

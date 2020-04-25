@@ -5,16 +5,24 @@ defmodule Cookpod.Recipes.RecipeQueries do
 
   alias Cookpod.Repo
   alias Cookpod.Recipes.Recipe
+  alias Cookpod.Recipes.RecipeStates
 
   def list_recipes do
     Recipe
+    |> where(state: "published")
+    |> Repo.all()
+  end
+
+  def list_drafts do
+    Recipe
+    |> where(state: "draft")
     |> Repo.all()
   end
 
   def get!(id), do: Repo.get!(Recipe, id)
 
   def create(attrs) do
-    %Recipe{}
+    %Recipe{state: RecipeStates.initial_state()}
     |> Recipe.changeset(attrs)
     |> Repo.insert()
   end

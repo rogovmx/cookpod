@@ -7,6 +7,7 @@ defmodule Cookpod.Recipes.Recipe do
     field :description, :string
     field :name, :string
     field :picture, Cookpod.Recipes.Picture.Type
+    field :state, :string
 
     timestamps()
   end
@@ -14,9 +15,10 @@ defmodule Cookpod.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:name, :description])
+    |> cast(attrs, [:name, :description, :state])
     |> cast_attachments(attrs, [:picture])
-    |> validate_required([:name, :description])
+    |> validate_required([:name, :description, :state])
+    |> validate_inclusion(:state, Cookpod.Recipes.RecipeStates.states())
     |> unique_constraint(:name)
   end
 end
