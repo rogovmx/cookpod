@@ -3,103 +3,25 @@ defmodule Cookpod.Recipes do
   The Recipes context.
   """
 
-  import Ecto.Query, warn: false
-  alias Cookpod.Repo
+  alias Cookpod.Recipes.RecipeQueries
 
-  alias Cookpod.Recipes.Recipe
-  alias Cookpod.Recipes.Picture
+  def list_recipes, do: RecipeQueries.list_recipes()
 
-  @doc """
-  Returns the list of recipes.
+  def get_recipe!(id), do: RecipeQueries.get!(id)
 
-  ## Examples
-
-      iex> list_recipes()
-      [%Recipe{}, ...]
-
-  """
-  def list_recipes do
-    Repo.all(Recipe)
-  end
-
-  @doc """
-  Gets a single recipe.
-
-  Raises `Ecto.NoResultsError` if the Recipe does not exist.
-
-  ## Examples
-
-      iex> get_recipe!(123)
-      %Recipe{}
-
-      iex> get_recipe!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_recipe!(id), do: Repo.get!(Recipe, id)
-
-  @doc """
-  Creates a recipe.
-
-  ## Examples
-
-      iex> create_recipe(%{field: value})
-      {:ok, %Recipe{}}
-
-      iex> create_recipe(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_recipe(attrs \\ %{}) do
-    %Recipe{}
-    |> Recipe.changeset(attrs)
-    |> Repo.insert()
+    RecipeQueries.create(attrs)
   end
 
-  @doc """
-  Updates a recipe.
-
-  ## Examples
-
-      iex> update_recipe(recipe, %{field: new_value})
-      {:ok, %Recipe{}}
-
-      iex> update_recipe(recipe, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_recipe(%Recipe{} = recipe, attrs) do
-    recipe
-    |> Recipe.changeset(attrs)
-    |> Repo.update()
+  def update_recipe(recipe, attrs) do
+    RecipeQueries.update(recipe, attrs)
   end
 
-  @doc """
-  Deletes a recipe.
-
-  ## Examples
-
-      iex> delete_recipe(recipe)
-      {:ok, %Recipe{}}
-
-      iex> delete_recipe(recipe)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_recipe(%Recipe{} = recipe) do
-    Repo.delete(recipe)
+  def delete_recipe(recipe) do
+    RecipeQueries.delete(recipe)
   end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking recipe changes.
-
-  ## Examples
-
-      iex> change_recipe(recipe)
-      %Ecto.Changeset{source: %Recipe{}}
-
-  """
-  def change_recipe(%Recipe{} = recipe) do
-    Recipe.changeset(recipe, %{})
+  def change_recipe(recipe) do
+    RecipeQueries.change(recipe)
   end
 end

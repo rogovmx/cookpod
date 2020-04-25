@@ -11,12 +11,10 @@ defmodule CookpodWeb.RecipeController do
 
   def new(conn, _params) do
     changeset = Recipes.change_recipe(%Recipe{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, :new, changeset: changeset)
   end
 
   def create(conn, %{"recipe" => recipe_params}) do
-    IO.inspect recipe_params
-    
     case Recipes.create_recipe(recipe_params) do
       {:ok, recipe} ->
         conn
