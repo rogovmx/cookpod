@@ -22,7 +22,7 @@ defmodule Cookpod.MixProject do
   def application do
     [
       mod: {Cookpod.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :arc_ecto]
       # extra_applications: [:logger, :runtime_tools, :set_locale],
     ]
   end
@@ -50,7 +50,13 @@ defmodule Cookpod.MixProject do
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false},
       {:phoenix_slime, "~> 0.13.1"},
       {:basic_auth, "~> 2.2.2"},
-      {:argon2_elixir, "~> 2.3"}
+      {:argon2_elixir, "~> 2.3"},
+      {:arc, "~> 0.11.0"},
+      {:arc_ecto, "~> 0.11.3"}
+      # {:ex_aws, "~> 2.0"},
+      # {:ex_aws_s3, "~> 2.0"},
+      # {:sweet_xml, "~> 0.6"},
+      # {:hackney, "~> 1.9"}
       # {:set_locale, "~> 0.2.1"},
     ]
   end

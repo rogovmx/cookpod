@@ -42,3 +42,16 @@ config :cookpod, CookpodWeb.Gettext, locales: ~w(en ru), default_locale: "ru"
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+config :arc,
+  storage: Arc.Storage.Local
+#   bucket: "cookpod"
+
+# config :ex_aws, :s3,
+#   access_key_id: "minio",
+#   secret_access_key: "minio111",
+#   region: "local",
+#   bucket: "cookpod",
+#   scheme: "http://",
+#   port: 9000,
+#   host: "localhost"

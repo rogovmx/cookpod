@@ -1,6 +1,8 @@
 defmodule CookpodWeb.PageController do
   use CookpodWeb, :controller
 
+  plug :put_layout, "page.html"
+
   def index(conn, _params) do
     render(conn, "index.html", current_user: current_user(conn))
   end

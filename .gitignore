@@ -34,4 +34,5 @@ npm-debug.log
 /priv/static/
 
 /.pg_data/
-
+/.s3_data/
+/uploads/

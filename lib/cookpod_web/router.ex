@@ -45,6 +45,12 @@ defmodule CookpodWeb.Router do
 
     resources "/sessions", SessionController, except: [:edit], singleton: true
     resources "/users", UserController, only: [:create, :new]
+
+    get "/recipes/drafts", RecipeController, :drafts
+    resources "/recipes", RecipeController do
+      put "/publish", RecipeController, :publish, as: :publish
+      put "/unpublish", RecipeController, :unpublish, as: :unpublish
+    end
   end
 
   # scope "/:locale", CookpodWeb do
