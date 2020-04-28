@@ -52,6 +52,16 @@ config :arc,
 #   secret_access_key: "minio111",
 #   region: "local",
 #   bucket: "cookpod",
-#   scheme: "http://",
+#   scheme: "http://", 
 #   port: 9000,
 #   host: "localhost"
+
+config :cookpod, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      router: CookpodWeb.Router,     # phoenix routes will be converted to swagger paths
+      endpoint: CookpodWeb.Endpoint  # (optional) endpoint config used to set host, port and https schemes.
+    ]
+  }
+
+config :phoenix_swagger, json_library: Jason
