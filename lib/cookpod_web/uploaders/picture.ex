@@ -41,5 +41,4 @@ defmodule Cookpod.Recipes.Picture do
       _ -> url({recipe.picture.file_name, recipe})
     end
   end
-
 end

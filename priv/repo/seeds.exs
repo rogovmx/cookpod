@@ -10,6 +10,14 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+Cookpod.Repo.insert!(%Cookpod.User{
+  email: "a1@a.a",
+  password: "pass",
+  password_confirmation: "pass"
+})
 
-Cookpod.Repo.insert!(%Cookpod.User{email: "a1@a.a", password: "pass", password_confirmation: "pass"})
-Cookpod.Repo.insert!(%Cookpod.User{email: "z@x.c", password: "pass", password_confirmation: "pass"})
+Cookpod.Repo.insert!(%Cookpod.User{
+  email: "z@x.c",
+  password: "pass",
+  password_confirmation: "pass"
+})

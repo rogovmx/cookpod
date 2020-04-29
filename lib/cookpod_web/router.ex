@@ -47,6 +47,7 @@ defmodule CookpodWeb.Router do
     resources "/users", UserController, only: [:create, :new]
 
     get "/recipes/drafts", RecipeController, :drafts
+
     resources "/recipes", RecipeController do
       put "/publish", RecipeController, :publish, as: :publish
       put "/unpublish", RecipeController, :unpublish, as: :unpublish

@@ -21,7 +21,7 @@ defmodule Cookpod.Recipes do
   end
 
   def publish_recipe(recipe), do: RecipeStates.event(recipe, :publish)
-  
+
   def unpublish_recipe(recipe), do: RecipeStates.event(recipe, :unpublish)
 
   def delete_recipe(recipe) do

@@ -5,5 +5,4 @@ defmodule CookpodWeb.LayoutView do
     "<a href=\"/#{locale}/#{List.delete_at(conn.path_info, 0)}\">#{language_title}</a>" |> raw
     # "<a href=\"#{Routes.page_path(conn, :index, locale)}\">#{language_title}</a>" |> raw
   end
-
 end

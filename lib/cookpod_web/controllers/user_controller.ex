@@ -16,9 +16,9 @@ defmodule CookpodWeb.UserController do
       {:ok, user} ->
         conn
         |> redirect(to: Routes.session_path(conn, :new))
+
       {:error, changeset} ->
         render(conn, :new, changeset: changeset)
     end
   end
-
 end
