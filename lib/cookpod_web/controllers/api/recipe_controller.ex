@@ -13,7 +13,7 @@ defmodule CookpodWeb.Api.RecipeController do
         properties do
         	id(:integer, "123", required: true)
         	name(:string, "fghgfh", required: true)
-        	description(:string, "jjj777", required: true)
+        	description(:string, "delicious", required: true)
         	picture(:string, "a.jpg", required: false)
         end
 
