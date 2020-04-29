@@ -11,5 +11,4 @@ defmodule CookpodWeb.RecipeView do
   def published?(recipe) do
     recipe.state == "published"
   end
-  
 end

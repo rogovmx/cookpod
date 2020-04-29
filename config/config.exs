@@ -27,15 +27,16 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :phoenix, :template_engines,
-	slim: PhoenixSlime.Engine,
-	slime: PhoenixSlime.Engine,
-	slimleex: PhoenixSlime.LiveViewEngine
+  slim: PhoenixSlime.Engine,
+  slime: PhoenixSlime.Engine,
+  slimleex: PhoenixSlime.LiveViewEngine
 
-config :cookpod, basic_auth: [
-  username: "admin",
-  password: "pass",
-  realm: "Closed Area"
-]  
+config :cookpod,
+  basic_auth: [
+    username: "admin",
+    password: "pass",
+    realm: "Closed Area"
+  ]
 
 config :cookpod, CookpodWeb.Gettext, locales: ~w(en ru), default_locale: "ru"
 
@@ -45,6 +46,7 @@ import_config "#{Mix.env()}.exs"
 
 config :arc,
   storage: Arc.Storage.Local
+
 #   bucket: "cookpod"
 
 # config :ex_aws, :s3,
@@ -59,8 +61,10 @@ config :arc,
 config :cookpod, :phoenix_swagger,
   swagger_files: %{
     "priv/static/swagger.json" => [
-      router: CookpodWeb.Router,     # phoenix routes will be converted to swagger paths
-      endpoint: CookpodWeb.Endpoint  # (optional) endpoint config used to set host, port and https schemes.
+      # phoenix routes will be converted to swagger paths
+      router: CookpodWeb.Router,
+      # (optional) endpoint config used to set host, port and https schemes.
+      endpoint: CookpodWeb.Endpoint
     ]
   }
 

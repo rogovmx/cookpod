@@ -7,7 +7,11 @@ defmodule Cookpod.RecipesTest do
     alias Cookpod.Recipes.Recipe
 
     @valid_attrs %{description: "some description", name: "some name", picture: "some picture"}
-    @update_attrs %{description: "some updated description", name: "some updated name", picture: "some updated picture"}
+    @update_attrs %{
+      description: "some updated description",
+      name: "some updated name",
+      picture: "some updated picture"
+    }
     @invalid_attrs %{description: nil, name: nil, picture: nil}
 
     def recipe_fixture(attrs \\ %{}) do

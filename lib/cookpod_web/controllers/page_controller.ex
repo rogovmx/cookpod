@@ -8,11 +8,11 @@ defmodule CookpodWeb.PageController do
   end
 
   def terms_and_conditions(conn, _params) do
-  	conn 
-  	|> render("tns.html", current_user: current_user(conn))
-	end
+    conn
+    |> render("tns.html", current_user: current_user(conn))
+  end
 
-	defp current_user(conn) do
-		get_session(conn, :current_user)
+  defp current_user(conn) do
+    get_session(conn, :current_user)
   end
 end

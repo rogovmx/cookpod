@@ -18,11 +18,13 @@ defmodule CookpodWeb.SessionController do
 
   def create(conn, %{"user" => %{"email" => email, "password" => password}}) do
     user = Repo.get_by(User, email: email)
+
     case Argon2.check_pass(user, password) do
       {:ok, user} ->
         conn
         |> put_session(:current_user, email)
         |> redirect(to: Routes.session_path(conn, :show))
+
       {:error, msg} ->
         # render(conn, :new, errors: msg)
         text(conn, msg)
@@ -34,5 +36,4 @@ defmodule CookpodWeb.SessionController do
     |> delete_session(:current_user)
     |> redirect(to: Routes.page_path(conn, :index))
   end
-
 end

@@ -4,7 +4,11 @@ defmodule CookpodWeb.RecipeControllerTest do
   alias Cookpod.Recipes
 
   @create_attrs %{description: "some description", name: "some name", picture: "some picture"}
-  @update_attrs %{description: "some updated description", name: "some updated name", picture: "some updated picture"}
+  @update_attrs %{
+    description: "some updated description",
+    name: "some updated name",
+    picture: "some updated picture"
+  }
   @invalid_attrs %{description: nil, name: nil, picture: nil}
 
   def fixture(:recipe) do
@@ -75,6 +79,7 @@ defmodule CookpodWeb.RecipeControllerTest do
     test "deletes chosen recipe", %{conn: conn, recipe: recipe} do
       conn = delete(conn, Routes.recipe_path(conn, :delete, recipe))
       assert redirected_to(conn) == Routes.recipe_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.recipe_path(conn, :show, recipe))
       end
