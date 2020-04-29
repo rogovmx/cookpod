@@ -58,13 +58,33 @@ defmodule CookpodWeb.Router do
     pipe_through [:browser, :protected]
 
     get "/terms_and_conditions", PageController, :terms_and_conditions
-  end  
+  end
+
+  scope "/api/v1", CookpodWeb.Api, as: :api do
+    pipe_through :api
+
+    resources "/recipes", RecipeController
+  end
+
+  scope "/api/swagger" do
+    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :cookpod, swagger_file: "swagger.json"
+  end
+
+  def swagger_info do
+    %{
+      info: %{
+        version: "1.0",
+        title: "Cookpod"
+      },
+      basePath: "/api/v1"
+    }
+  end
 
   def handle_errors(conn, %{kind: :error, reason: %Phoenix.Router.NoRouteError{}}) do
     conn
     |> fetch_session()
     |> fetch_flash()
-    |> put_layout({CookpodWeb.LayoutView, :session})
+    |> put_layout({CookpodWeb.LayoutView, :app})
     |> put_view(CookpodWeb.ErrorView)
     |> render("404.html")
   end
@@ -73,7 +93,7 @@ defmodule CookpodWeb.Router do
     conn
     |> fetch_session()
     |> fetch_flash()
-    |> put_layout({CookpodWeb.LayoutView, :session})
+    |> put_layout({CookpodWeb.LayoutView, :app})
     |> put_view(CookpodWeb.ErrorView)
     |> render("500.html")
   end
@@ -81,9 +101,4 @@ defmodule CookpodWeb.Router do
   def handle_errors(conn, _) do
     conn
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", CookpodWeb do
-  #   pipe_through :api
-  # end
 end
