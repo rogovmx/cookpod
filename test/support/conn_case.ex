@@ -37,7 +37,6 @@ defmodule CookpodWeb.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(Cookpod.Repo, {:shared, self()})
     end
 
-    # context = %{conn: Phoenix.ConnTest.build_conn()}
     conn = Phoenix.ConnTest.build_conn()
 
     conn =
@@ -52,7 +51,6 @@ defmodule CookpodWeb.ConnCase do
         _ -> conn
       end
 
-    # {:ok, context}
     {:ok, conn: conn}
   end
 
@@ -63,12 +61,4 @@ defmodule CookpodWeb.ConnCase do
   defp authenticated_user(conn) do
     CookpodWeb.AuthHelpers.login_user(conn)
   end
-
-  # defp basic_auth(context) do
-  #   conn =
-  #     Map.fetch!(context, :conn)
-  #     |> CookpodWeb.AuthHelpers.basic_auth()
-
-  #   %{context | conn: conn}
-  # end
 end

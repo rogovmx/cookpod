@@ -18,3 +18,6 @@ config :cookpod, CookpodWeb.Endpoint,
 config :logger, level: :debug
 
 config :phoenix_slime, :use_slim_extension, true
+
+config :phoenix_integration,
+  endpoint: CookpodWeb.Endpoint
