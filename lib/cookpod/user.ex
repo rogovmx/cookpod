@@ -6,6 +6,7 @@ defmodule Cookpod.User do
     field :email, :string
     field :password_hash, :string
     field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
 
     timestamps()
   end
@@ -13,8 +14,8 @@ defmodule Cookpod.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password])
-    |> validate_required([:email, :password])
+    |> cast(attrs, [:email, :password, :password_confirmation])
+    |> validate_required([:email])
     |> validate_length(:password, min: 4)
     |> validate_confirmation(:password, message: "does not match password")
     |> validate_format(:email, ~r/@/)

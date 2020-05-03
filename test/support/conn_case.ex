@@ -25,6 +25,8 @@ defmodule CookpodWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint CookpodWeb.Endpoint
+
+      import CookpodWeb.AuthHelpers
     end
   end
 
@@ -35,6 +37,38 @@ defmodule CookpodWeb.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(Cookpod.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    # context = %{conn: Phoenix.ConnTest.build_conn()}
+    conn = Phoenix.ConnTest.build_conn()
+
+    conn =
+      case tags[:basic_auth] do
+        true -> basic_auth(conn)
+        _ -> conn
+      end
+
+    conn =
+      case tags[:authenticated_user] do
+        true -> authenticated_user(conn)
+        _ -> conn
+      end
+
+    # {:ok, context}
+    {:ok, conn: conn}
   end
+
+  defp basic_auth(conn) do
+    CookpodWeb.AuthHelpers.basic_auth(conn)
+  end
+
+  defp authenticated_user(conn) do
+    CookpodWeb.AuthHelpers.login_user(conn)
+  end
+
+  # defp basic_auth(context) do
+  #   conn =
+  #     Map.fetch!(context, :conn)
+  #     |> CookpodWeb.AuthHelpers.basic_auth()
+
+  #   %{context | conn: conn}
+  # end
 end

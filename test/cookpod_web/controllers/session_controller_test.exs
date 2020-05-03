@@ -4,58 +4,79 @@ defmodule CookpodWeb.SessionControllerTest do
   import Plug.Conn
   import Plug.Test
 
-  @username 'admin'
-  @password 'pass'
+  import Cookpod.Factory
 
-  defp using_basic_auth(conn, username, password) do
-    header_content = "Basic " <> Base.encode64("#{username}:#{password}")
-    conn |> put_req_header("authorization", header_content)
-  end
+  @moduletag basic_auth: true
 
-  test "GET /sessions", %{conn: conn} do
-    conn =
-      conn
-      |> using_basic_auth(@username, @password)
-      |> get("/sessions")
+  describe "index" do
+    test "GET /sessions not authenticated", %{conn: conn} do
+      conn = get(conn, "/sessions")
 
-    assert html_response(conn, 200) =~ "You are not logged in"
-  end
+      assert html_response(conn, 200) =~ "You are not logged in"
+    end
 
-  test "GET /sessions authenticated", %{conn: conn} do
-    conn =
-      conn
-      |> using_basic_auth(@username, @password)
-      |> init_test_session(%{current_user: "test-user"})
-      |> get(Routes.session_path(conn, :show))
+    test "GET /sessions authenticated", %{conn: conn} do
+      conn =
+        conn
+        |> init_test_session(%{current_user: "test-user@test.tst"})
+        |> get(Routes.session_path(conn, :show))
 
-    assert html_response(conn, 200) =~ "You are logged in"
+      assert html_response(conn, 200) =~ "You are logged in as test-user@test.tst"
+    end
+
+    @tag authenticated_user: true
+    test "GET /sessions with authenticated user", %{conn: conn} do
+      conn = get(conn, Routes.session_path(conn, :show))
+
+      assert html_response(conn, 200) =~
+               "You are logged in as #{get_session(conn, :current_user)}"
+    end
   end
 
   test "GET /sessions/new", %{conn: conn} do
-    conn =
-      conn
-      |> using_basic_auth(@username, @password)
-      |> get("/sessions/new")
+    conn = get(conn, "/sessions/new")
 
     assert html_response(conn, 200) =~ "New session"
   end
 
-  @data %{name: "Mike", password: "abc123"}
+  describe "create session" do
+    test "login with valid user", %{conn: conn} do
+      user = insert(:user)
+      path = Routes.session_path(conn, :create)
+      valid_params = %{"email" => user.email, "password" => "test1"}
 
-  test "login and logout", %{conn: conn} do
+      conn =
+        conn
+        |> init_test_session(%{})
+        |> post(path, %{user: valid_params})
+
+      assert get_session(conn, :current_user) == user.email
+      assert redirected_to(conn, 302) == Routes.page_path(conn, :index)
+    end
+
+    test "login with invalid user", %{conn: conn} do
+      user = insert(:user)
+      path = Routes.session_path(conn, :create)
+      invalid_params = %{"email" => user.email, "password" => "test_invalid"}
+
+      conn =
+        conn
+        |> init_test_session(%{})
+        |> post(path, %{user: invalid_params})
+
+      assert html_response(conn, 422) =~ "invalid password"
+    end
+  end
+
+  test "DELETE /sessions/delete", %{conn: conn} do
+    path = Routes.session_path(conn, :delete)
+
     conn =
       conn
-      |> using_basic_auth(@username, @password)
+      |> init_test_session(%{current_user: "test-user@test.tst"})
+      |> delete(path)
 
-    login = post(conn, Routes.session_path(conn, :create, %{user: @data}))
-    assert html_response(login, 302) =~ "redirected"
-
-    session_user = get_session(login, :current_user)
-    assert session_user == "Mike"
-
-    del = delete(login, Routes.session_path(login, :delete))
-    assert html_response(del, 302) =~ "redirected"
-
-    refute get_session(del, :current_user)
+    assert get_session(conn, :current_user) == nil
+    assert redirected_to(conn, 302) == Routes.page_path(conn, :index)
   end
 end
