@@ -31,12 +31,7 @@ config :phoenix, :template_engines,
   slime: PhoenixSlime.Engine,
   slimleex: PhoenixSlime.LiveViewEngine
 
-config :cookpod,
-  basic_auth: [
-    username: "admin",
-    password: "pass",
-    realm: "Closed Area"
-  ]
+config :cookpod, :basic_auth, username: "admin", password: "pass"
 
 config :cookpod, CookpodWeb.Gettext, locales: ~w(en ru), default_locale: "ru"
 

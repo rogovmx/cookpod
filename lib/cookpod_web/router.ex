@@ -2,13 +2,15 @@ defmodule CookpodWeb.Router do
   use CookpodWeb, :router
   use Plug.ErrorHandler
 
+  import Plug.BasicAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug BasicAuth, use_config: {:cookpod, :basic_auth}
+    plug :basic_auth, Application.compile_env(:cookpod, :basic_auth)
 
     # plug(SetLocale,
     #   gettext: CookpodWeb.Gettext,
@@ -20,12 +22,6 @@ defmodule CookpodWeb.Router do
 
   pipeline :protected do
     plug CookpodWeb.AuthPlug
-  end
-
-  pipeline :basic_auth do
-    plug BasicAuth,
-      callback: &MyAppWeb.Protected.Authentication.authenticate/3,
-      custom_response: &MyAppWeb.Protected.Helpers.unauthorized_response/1
   end
 
   pipeline :api do
@@ -43,7 +39,10 @@ defmodule CookpodWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/sessions", SessionController, except: [:edit], singleton: true
+    resources "/sessions", SessionController,
+      only: [:new, :show, :create, :delete],
+      singleton: true
+
     resources "/users", UserController, only: [:create, :new]
 
     get "/recipes/drafts", RecipeController, :drafts
