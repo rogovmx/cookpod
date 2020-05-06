@@ -10,7 +10,8 @@ defmodule Cookpod.RecipesTest do
     @update_attrs %{
       description: "some updated description",
       name: "some updated name",
-      picture: "some updated picture"
+      picture: "some updated picture",
+      state: "published"
     }
     @invalid_attrs %{description: nil, name: nil, picture: nil}
 
@@ -28,7 +29,6 @@ defmodule Cookpod.RecipesTest do
       assert {:ok, %Recipe{} = recipe} = Recipes.create_recipe(@valid_attrs)
       assert recipe.description == "some description"
       assert recipe.name == "some name"
-      assert recipe.picture == "some picture"
     end
 
     test "create_recipe/1 with invalid data returns error changeset" do
@@ -40,7 +40,6 @@ defmodule Cookpod.RecipesTest do
       assert {:ok, %Recipe{} = recipe} = Recipes.update_recipe(recipe, @update_attrs)
       assert recipe.description == "some updated description"
       assert recipe.name == "some updated name"
-      assert recipe.picture == "some updated picture"
     end
 
     test "update_recipe/2 with invalid data returns error changeset" do

@@ -1,5 +1,5 @@
 defmodule CookpodWeb.PageControllerTest do
-  use CookpodWeb.ConnCase
+  use CookpodWeb.AuthCase
 
   @moduletag basic_auth: true
 

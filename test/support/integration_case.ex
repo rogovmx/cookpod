@@ -3,7 +3,7 @@ defmodule CookpodWeb.IntegrationCase do
 
   using do
     quote do
-      use CookpodWeb.ConnCase
+      use CookpodWeb.AuthCase
       use PhoenixIntegration
       import Cookpod.Factory
     end

@@ -1,5 +1,5 @@
 defmodule CookpodWeb.SessionControllerTest do
-  use CookpodWeb.ConnCase
+  use CookpodWeb.AuthCase
 
   import Plug.Conn
   import Plug.Test
