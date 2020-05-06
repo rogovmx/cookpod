@@ -7,8 +7,6 @@ defmodule CookpodWeb.SessionController do
   def show(conn, _params) do
     current_user = get_session(conn, :current_user)
     render(conn, :show, current_user: current_user)
-    # text(conn, conn.assigns[:from_any_plug])
-    # json(conn, %{status: :ok})
   end
 
   def new(conn, _params) do
@@ -16,18 +14,20 @@ defmodule CookpodWeb.SessionController do
     render(conn, :new, changeset: changeset)
   end
 
-  def create(conn, %{"user" => %{"email" => email, "password" => password}}) do
-    user = Repo.get_by(User, email: email)
+  def create(conn, %{"user" => attrs}) do
+    user = Repo.get_by(User, email: attrs["email"])
 
-    case Argon2.check_pass(user, password) do
+    case Argon2.check_pass(user, attrs["password"]) do
       {:ok, user} ->
         conn
-        |> put_session(:current_user, email)
-        |> redirect(to: Routes.session_path(conn, :show))
+        |> put_session(:current_user, user.email)
+        |> redirect(to: Routes.page_path(conn, :index))
 
       {:error, msg} ->
-        # render(conn, :new, errors: msg)
-        text(conn, msg)
+        conn
+        |> put_status(422)
+        |> put_flash(:error, msg)
+        |> render(:new)
     end
   end
 
