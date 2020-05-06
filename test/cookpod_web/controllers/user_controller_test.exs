@@ -5,23 +5,6 @@ defmodule CookpodWeb.AccountControllerTest do
 
   @moduletag basic_auth: true
 
-  # describe "me/2" do
-  #   @tag authenticated_user: true
-  #   test "it renders profile page if user authenticated", %{conn: conn, current_user: user} do
-  #     path = Routes.account_me_path(conn, :me)
-  #     conn = get(conn, path)
-
-  #     assert html_response(conn, 200) =~ user.email
-  #   end
-
-  #   test "it redirects to login page unless user authenticated", %{conn: conn} do
-  #     path = Routes.account_me_path(conn, :me)
-  #     conn = get(conn, path)
-
-  #     assert redirected_to(conn, 302) == Routes.session_path(conn, :new)
-  #   end
-  # end
-
   describe "GET /new" do
     test "it renders new profile page", %{conn: conn} do
       path = Routes.account_path(conn, :new)
