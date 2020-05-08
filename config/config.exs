@@ -16,7 +16,7 @@ config :cookpod, CookpodWeb.Endpoint,
   secret_key_base: "uwaigbrqkH8YRPYh9JqOLQFy0l0AAiXeVPOmrUHXfwwrEQFTwHY/ciU16dJU7iAq",
   render_errors: [view: CookpodWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Cookpod.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "Ki00G4KS"]
+  live_view: [signing_salt: "DYq73bAbWgmPv5k6Ds+6SjJOPYFUPyWG"]
 
 # Configures Elixir's Logger
 config :logger, :console,
