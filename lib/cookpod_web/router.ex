@@ -12,6 +12,7 @@ defmodule CookpodWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :basic_auth, Application.compile_env(:cookpod, :basic_auth)
+    plug :put_root_layout, {CookpodWeb.LayoutView, :root}
 
     # plug(SetLocale,
     #   gettext: CookpodWeb.Gettext,
@@ -41,7 +42,7 @@ defmodule CookpodWeb.Router do
     get "/", PageController, :index
     get "/hard_work", PageController, :hard_work
 
-    live "/gallery", CookpodLive
+    live "/live_test", CookpodLive
 
 
     resources "/sessions", SessionController,
