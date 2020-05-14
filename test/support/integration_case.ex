@@ -8,5 +8,4 @@ defmodule CookpodWeb.IntegrationCase do
       import Cookpod.Factory
     end
   end
-
 end

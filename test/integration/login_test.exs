@@ -25,7 +25,6 @@ defmodule CookpodWeb.LoginTest do
     )
   end
 
-
   test "Login invalid user", %{conn: conn, user: user} do
     get(conn, Routes.page_path(conn, :index))
     |> follow_link("Log in")
@@ -41,5 +40,4 @@ defmodule CookpodWeb.LoginTest do
       html: "invalid password"
     )
   end
-
 end

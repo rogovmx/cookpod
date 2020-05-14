@@ -42,9 +42,6 @@ defmodule CookpodWeb.Router do
     get "/", PageController, :index
     get "/hard_work", PageController, :hard_work
 
-    live "/live_test", CookpodLive
-
-
     resources "/sessions", SessionController,
       only: [:new, :show, :create, :delete],
       singleton: true

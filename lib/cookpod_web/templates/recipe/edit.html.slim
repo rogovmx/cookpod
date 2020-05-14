@@ -1,5 +1,6 @@
 h1 Edit Recipe
 
-= render "form.html", Map.put(assigns, :action, Routes.recipe_path(@conn, :update, @recipe))
+= live_render @conn, CookpodWeb.RecipeFormLive, session: %{"id" => @recipe.id, "action" => Routes.recipe_path(@conn, :update, @recipe), "csrf_token" => Plug.CSRFProtection.get_csrf_token()}
+
 
 span= link "Back", to: Routes.recipe_path(@conn, :index)

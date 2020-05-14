@@ -3,7 +3,7 @@ defmodule CookpodWeb.DemoChannel do
 
   require Logger
 
-  def join("demo:" <> id, payload, socket) do
+  def join("demo:" <> _id, payload, socket) do
     if authorized?(payload) do
       {:ok, socket}
     else
@@ -13,14 +13,14 @@ defmodule CookpodWeb.DemoChannel do
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
-  def handle_in("ping", payload, socket) do
+  def handle_in("ping", _payload, socket) do
     {:reply, {:ok, %{from_server: true}}, socket}
   end
 
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (demo:lobby).
   def handle_in("shout", payload, socket) do
-    broadcast socket, "shout", payload
+    broadcast(socket, "shout", payload)
     {:noreply, socket}
   end
 
