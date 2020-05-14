@@ -3,11 +3,20 @@ defmodule Cookpod.Recipes.Recipe do
   use Arc.Ecto.Schema
   import Ecto.Changeset
 
+  alias Cookpod.Recipes.Ingredient
+
   schema "recipes" do
     field :description, :string
     field :name, :string
     field :picture, Cookpod.Recipes.Picture.Type
     field :state, :string
+
+    has_many :ingridients, Ingredient
+    has_many :products, through: [:ingridients, :product]
+
+    embeds_one :meta, Meta do
+      field :vegan, :string, default: "none"
+    end
 
     timestamps()
   end
