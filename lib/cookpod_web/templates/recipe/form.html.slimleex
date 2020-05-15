@@ -1,4 +1,3 @@
-  
 = f = form_for @changeset, @action, [multipart: true, phx_change: :validate, csrf_token: @csrf_token]
   .form-group
     = label f, :name, class: "control-label"

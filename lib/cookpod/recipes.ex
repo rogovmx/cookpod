@@ -5,6 +5,10 @@ defmodule Cookpod.Recipes do
 
   alias Cookpod.Recipes.RecipeQueries
   alias Cookpod.Recipes.RecipeStates
+  alias Cookpod.Recipes.Ingredient
+  alias Cookpod.Repo
+
+  import Ecto.Query
 
   def list_recipes, do: RecipeQueries.list_recipes()
 
@@ -30,5 +34,15 @@ defmodule Cookpod.Recipes do
 
   def change_recipe(recipe) do
     RecipeQueries.change(recipe)
+  end
+
+  def total_recipe_calories(recipe) do
+    query =
+      from ingredient in Ingredient,
+        join: product in assoc(ingredient, :product),
+        where: ingredient.recipe_id == ^recipe.id,
+        select: fragment("SUM (amount * (fats * 9 + carbs * 4 + proteins * 4)) / 100")
+
+    Repo.one(query)
   end
 end
