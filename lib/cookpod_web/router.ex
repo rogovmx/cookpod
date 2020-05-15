@@ -7,10 +7,12 @@ defmodule CookpodWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    # plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :basic_auth, Application.compile_env(:cookpod, :basic_auth)
+    plug :put_root_layout, {CookpodWeb.LayoutView, :root}
 
     # plug(SetLocale,
     #   gettext: CookpodWeb.Gettext,
@@ -39,7 +41,6 @@ defmodule CookpodWeb.Router do
 
     get "/", PageController, :index
     get "/hard_work", PageController, :hard_work
-
 
     resources "/sessions", SessionController,
       only: [:new, :show, :create, :delete],

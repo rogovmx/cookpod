@@ -34,5 +34,4 @@ defmodule CookpodWeb.RegistrationTest do
       html: "Registration"
     )
   end
-
 end

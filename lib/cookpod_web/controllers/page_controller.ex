@@ -33,5 +33,4 @@ defmodule CookpodWeb.PageController do
     |> Base.encode16()
     |> String.downcase()
   end
-
 end
