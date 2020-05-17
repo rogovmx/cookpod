@@ -1,9 +1,11 @@
 defmodule CookpodWeb.IngredientController do
   use CookpodWeb, :controller
 
+  alias Cookpod.Recipe
   alias Cookpod.Recipes
   alias Cookpod.Recipes.Ingredient
   alias Cookpod.Recipes.Ingredients
+  alias Cookpod.Recipes.Products
 
   def index(conn, _params) do
     ingredients = Ingredients.list_ingredients()
@@ -29,7 +31,9 @@ defmodule CookpodWeb.IngredientController do
 
   def show(conn, %{"id" => id}) do
     ingredient = Ingredients.get_ingredient!(id)
-    render(conn, :show, ingredient: ingredient)
+    recipe = Recipes.get_recipe!(ingredient.recipe_id)
+    product = Products.get_product!(ingredient.product_id)
+    render(conn, :show, ingredient: ingredient, recipe: recipe, product: product)
   end
 
   def edit(conn, %{"id" => id}) do

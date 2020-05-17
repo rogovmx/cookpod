@@ -2,6 +2,12 @@ h1 Show Ingredient
 
 ul
   li
+    strong Recipe:&nbsp;
+    = @recipe.name
+  li
+    strong Product:&nbsp;
+    = @product.name
+  li
     strong Amount:&nbsp;
     = @ingredient.amount
 

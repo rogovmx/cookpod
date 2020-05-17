@@ -5,5 +5,12 @@
   = label f, :amount, class: "control-label"
   = number_input f, :amount, class: "form-control"
   = error_tag f, :amount
+  .form-group
+    = label f, :recipe_id, "Recipe", class: "control-label"
+    = select(f, :recipe_id, select_recipes)
+  .form-group
+    = label f, :product_id, "Product", class: "control-label"
+    = select(f, :product_id, select_products)
+
   div
     = submit "Submit"

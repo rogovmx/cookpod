@@ -8,7 +8,7 @@ defmodule Cookpod.Recipes.RecipeStates do
   }
 
   alias Cookpod.Recipes.Recipe
-  alias Cookpod.Recipes.RecipeQueries
+  alias Cookpod.Recipes
 
   def initial_state, do: @initial_state
   def states, do: Map.values(@states)
@@ -25,11 +25,11 @@ defmodule Cookpod.Recipes.RecipeStates do
   # Handlers
   def publish(recipe) do
     {:ok, next_state} = Map.fetch(@states, :published)
-    RecipeQueries.update(recipe, %{state: next_state})
+    Recipes.update_recipe(recipe, %{state: next_state})
   end
 
   def unpublish(recipe) do
     {:ok, next_state} = Map.fetch(@states, :draft)
-    RecipeQueries.update(recipe, %{state: next_state})
+    Recipes.update_recipe(recipe, %{state: next_state})
   end
 end

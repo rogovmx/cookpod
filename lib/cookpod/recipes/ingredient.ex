@@ -16,7 +16,7 @@ defmodule Cookpod.Recipes.Ingredient do
   @doc false
   def changeset(component, attrs) do
     component
-    |> cast(attrs, [:amount])
-    |> validate_required([:amount])
+    |> cast(attrs, [:amount, :recipe_id, :product_id])
+    |> validate_required([:amount, :recipe_id, :product_id])
   end
 end

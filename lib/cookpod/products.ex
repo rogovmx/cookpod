@@ -6,6 +6,11 @@ defmodule Cookpod.Recipes.Products do
   alias Cookpod.Recipes.Ingredient
   alias Cookpod.Repo
 
+  import Ecto.Query
+
+  def list_name_id do
+    Repo.all(from(r in Product, select: {r.name, r.id}))
+  end
 
   def list_products do
     Repo.all(Product)
