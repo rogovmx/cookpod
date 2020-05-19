@@ -34,5 +34,5 @@ defmodule CookpodWeb.RecipeFormLive do
   end
 
   defp get_recipe(%{"id" => id} = _product_params), do: Recipes.get_recipe!(id)
-  defp get_recipe(_product_params), do: %Recipe{state: Recipe.initial_state()}
+  defp get_recipe(_product_params), do: %Recipe{state: "draft"}
 end

@@ -54,6 +54,9 @@ defmodule CookpodWeb.Router do
       put "/publish", RecipeController, :publish, as: :publish
       put "/unpublish", RecipeController, :unpublish, as: :unpublish
     end
+
+    resources "/products", ProductController
+    resources "/ingredients", IngredientController
   end
 
   # scope "/:locale", CookpodWeb do
