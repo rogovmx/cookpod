@@ -2,13 +2,18 @@ defmodule Cookpod.Recipes do
   @moduledoc """
   The Recipes context.
   """
-  
+
   alias Cookpod.Recipes.RecipeStates
   alias Cookpod.Recipes.Ingredient
   alias Cookpod.Recipes.Recipe
+  alias Cookpod.Recipes.ViewCounter
   alias Cookpod.Repo
 
   import Ecto.Query
+
+  def inc_recipe_views(id), do: ViewCounter.inc(id)
+
+  def view_stats(), do: ViewCounter.stats()
 
   def list_name_id do
     Repo.all(from(r in Recipe, select: {r.name, r.id}))

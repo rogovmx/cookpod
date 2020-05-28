@@ -30,12 +30,6 @@ defmodule CookpodWeb.Router do
     plug :accepts, ["json"]
   end
 
-  # scope "/", CookpodWeb do
-  #   pipe_through :browser
-  #   get "/", PageController, :dummy
-  # end
-
-  # scope "/:locale", CookpodWeb do
   scope "/", CookpodWeb do
     pipe_through [:browser]
 
@@ -49,6 +43,7 @@ defmodule CookpodWeb.Router do
     resources "/users", UserController, only: [:create, :new]
 
     get "/recipes/drafts", RecipeController, :drafts
+    get "/recipes/view_stats", RecipeController, :view_stats
 
     resources "/recipes", RecipeController do
       put "/publish", RecipeController, :publish, as: :publish
@@ -59,7 +54,6 @@ defmodule CookpodWeb.Router do
     resources "/ingredients", IngredientController
   end
 
-  # scope "/:locale", CookpodWeb do
   scope "/", CookpodWeb do
     pipe_through [:browser, :protected]
 

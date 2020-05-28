@@ -32,9 +32,15 @@ defmodule CookpodWeb.RecipeController do
   end
 
   def show(conn, %{"id" => id}) do
+    Recipes.inc_recipe_views(id)
     recipe = Recipes.get_recipe!(id)
     total = Recipes.total_recipe_calories(recipe)
     render(conn, :show, recipe: recipe, total: total)
+  end
+
+  def view_stats(conn, _params) do
+    stats = Recipes.view_stats()
+    render(conn, :view_stats, stats: stats)
   end
 
   def publish(conn, %{"recipe_id" => id}) do
